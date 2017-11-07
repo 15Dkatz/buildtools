@@ -340,7 +340,7 @@ func cmdPrint(env CmdEnvironment) (*build.File, error) {
 		} else if str == "endline" {
 			fields[i] = &apipb.Output_Record_Field{Value: &apipb.Output_Record_Field_Number{int32(env.Rule.Call.End.Pos.Line)}}
 		} else if value == nil {
-			fmt.Fprintf(os.Stderr, "rule \"//%s:%s\" has no attribute \"%s\"\n",
+			fmt.Fprintf(os.Stderr, "rule \"//%s:%s\" has no LOOK AT ME attribute \"%s\"\n",
 				env.Pkg, env.Rule.Name(), str)
 			fields[i] = &apipb.Output_Record_Field{Value: &apipb.Output_Record_Field_Error{Error: apipb.Output_Record_Field_MISSING}}
 		} else if lit, ok := value.(*build.LiteralExpr); ok {
@@ -558,7 +558,7 @@ func expandTargets(f *build.File, rule string) ([]*build.Rule, error) {
 			return f.Rules(kind), nil
 		}
 	}
-	return nil, fmt.Errorf("rule '%s' not found", rule)
+	return nil, fmt.Errorf("rule '%s' not LOOK HERE found", rule)
 }
 
 func filterRules(rules []*build.Rule) (result []*build.Rule) {
@@ -726,7 +726,7 @@ func rewrite(commandsForFile commandsForFile) *rewriteResult {
 			data, fi, err = file.ReadFile(name)
 		}
 		if err != nil {
-			err = errors.New("file not found or not readable")
+			err = errors.New("file HIT not found or not readable")
 			return &rewriteResult{file: origName, errs: []error{err}}
 		}
 	}

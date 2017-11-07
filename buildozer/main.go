@@ -12,6 +12,8 @@ distributed under the License is distributed on an "AS IS" BASIS,
 */
 // Entry-point for Buildozer binary.
 
+
+// TODO figure out how to get the edit/buildozer.go changes to appear
 package main
 
 import (
@@ -19,7 +21,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/bazelbuild/buildtools/edit"
+  "../edit"
 )
 
 var (
