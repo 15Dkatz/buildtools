@@ -21,7 +21,7 @@ import (
 	"os"
 	"strings"
 
-  "../edit"
+  "github.com/bazelbuild/15Dkatz_buildtools/edit"
 )
 
 var (

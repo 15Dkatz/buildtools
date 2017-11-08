@@ -256,8 +256,30 @@ func FindRuleByName(f *build.File, name string) *build.Rule {
 	if i != -1 {
 		return &build.Rule{Call: f.Stmt[i].(*build.CallExpr)}
 	}
+  // TODO: remove this debug
+  fmt.Printf("returning nil because no name found\n");
+
+  // here is where the directory thing can happen
+  // TODO place the logic in a helper function
+  return UseDirectoryName(f, name)
+
+
 
 	return nil
+}
+
+// TODO: is build global?
+// TODO: what is the build.File, what does it contain?
+// TODO docs
+func UseDirectoryName(f *build.File, name string) *build.Rule {
+  fmt.Printf("UseDirectoryName helper function\n");
+  // TODO: figure out how this Call parameter works so that I can return
+  // something else
+
+  // TODO: figure how to construct an arbitray Call struct with string data
+
+  // TODO: dissect this piece by piece to figure out what it's trying to do
+  return &build.Rule{Call: "tmp".(*build.CallExpr)}
 }
 
 // IndexOfRuleByName returns the index (in f.Stmt) of the CallExpr which defines a rule named `name`, or -1 if it doesn't exist.

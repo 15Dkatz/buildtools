@@ -314,8 +314,17 @@ func cmdReplaceSubinclude(env CmdEnvironment) (*build.File, error) {
 	return env.File, nil
 }
 
+/*
+ TODO:
+[] print out something when there is no name: fmt.Fprintf(os.Stderr...)
+[] print out the name of the directory when there is no name
+[] use the name of the directory when there is no name
+
+*/
 func cmdPrint(env CmdEnvironment) (*build.File, error) {
-	format := env.Args
+  fmt.Fprintf(os.Stderr, "name function\n")
+
+  format := env.Args
 	if len(format) == 0 {
 		format = []string{"name", "kind"}
 	}
@@ -323,12 +332,17 @@ func cmdPrint(env CmdEnvironment) (*build.File, error) {
 
 	for i, str := range format {
 		value := env.Rule.Attr(str)
+
+    // TODO use the go debugger to explore the value
 		if str == "kind" {
 			fields[i] = &apipb.Output_Record_Field{Value: &apipb.Output_Record_Field_Text{env.Rule.Kind()}}
 		} else if str == "label" {
 			if env.Rule.Attr("name") != nil {
 				fields[i] = &apipb.Output_Record_Field{Value: &apipb.Output_Record_Field_Text{fmt.Sprintf("//%s:%s", env.Pkg, env.Rule.Name())}}
 			} else {
+
+        fmt.Fprintf(os.Stderr, "no name")
+
 				return nil, nil
 			}
 		} else if str == "rule" {
@@ -538,7 +552,8 @@ var AllCommands = map[string]CommandInfo{
 }
 
 func expandTargets(f *build.File, rule string) ([]*build.Rule, error) {
-	if r := FindRuleByName(f, rule); r != nil {
+  // TODO: perhaps debug here to look at f and rule?
+  if r := FindRuleByName(f, rule); r != nil {
 		return []*build.Rule{r}, nil
 	} else if r := FindExportedFile(f, rule); r != nil {
 		return []*build.Rule{r}, nil
