@@ -212,6 +212,8 @@ func cmdNew(env CmdEnvironment) (*build.File, error) {
 		return nil, err
 	}
 
+  println("!**name: %s\n", name)
+
 	if FindRuleByName(env.File, name) != nil {
 		return nil, fmt.Errorf("rule '%s' already exists", name)
 	}
@@ -552,6 +554,7 @@ var AllCommands = map[string]CommandInfo{
 }
 
 func expandTargets(f *build.File, rule string) ([]*build.Rule, error) {
+  println("** rule: %s", rule);
   // TODO: perhaps debug here to look at f and rule?
   if r := FindRuleByName(f, rule); r != nil {
 		return []*build.Rule{r}, nil

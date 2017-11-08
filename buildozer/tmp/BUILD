@@ -1,1 +1,3 @@
-target(name="tmp")
+target(
+  dependencies="a"
+)
